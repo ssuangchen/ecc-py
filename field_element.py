@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 
+# 有限域元素
 class FieldElement:
     def __init__(self, num, prime):
         if num >= prime or num < 0:
@@ -46,10 +47,11 @@ class FieldElement:
     def __truediv__(self, other):
         if self.prime != other.prime:
             raise TypeError('Cannot divide two numbers in different Fields')
-        # A/B = A * B**(prime-2) % prime
+        # A / B = A * B ** (prime - 2) % prime
         num = (self.num * pow(other.num, self.prime - 2, self.prime)) % self.prime
         return self.__class__(num, self.prime)
 
+    # 标量乘法
     def __rmul__(self, coefficient):
         num = (self.num * coefficient) % self.prime
         return self.__class__(num=num, prime=self.prime)

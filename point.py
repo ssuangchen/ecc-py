@@ -3,6 +3,7 @@ from unittest import TestCase
 from field_element import FieldElement
 
 
+# 椭圆曲线上的点
 class Point:
     def __init__(self, x, y, a, b):
         self.a = a
@@ -58,6 +59,7 @@ class Point:
         if self == other and self.y == 0 * self.x:
             return self.__class__(None, None, self.a, self.b)
 
+    # 标量乘法
     def __rmul__(self, coefficient):
         coef = coefficient
         current = self
@@ -134,7 +136,7 @@ class ECCTest(TestCase):
             p1 = Point(x1, y1, a, b)
             p2 = Point(x2, y2, a, b)
             p3 = Point(x3, y3, a, b)
-            self.assertEqual(p1+p2, p3)
+            self.assertEqual(p1 + p2, p3)
 
     def test_rmul(self):
         prime = 223

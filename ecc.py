@@ -6,6 +6,7 @@ from unittest import TestCase
 from field_element import FieldElement
 from point import Point
 
+# SECP256k1
 A = 0
 B = 7
 P = 2 ** 256 - 2 ** 32 - 977
@@ -34,6 +35,7 @@ class S256Point(Point):
         else:
             return 'S256Point({}, {})'.format(self.x, self.y)
 
+    # 标量乘法
     def __rmul__(self, coefficient):
         coef = coefficient % N
         return super().__rmul__(coef)
@@ -135,6 +137,6 @@ class PrivateKey:
 class PrivateKeyTest(TestCase):
     def test_sign(self):
         pk = PrivateKey(random.randint(0, N))
-        z = random.randint(0, 2**256)
+        z = random.randint(0, 2 ** 256)
         sig = pk.sign(z)
         self.assertTrue(pk.point.verify(z, sig))
